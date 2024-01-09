@@ -1,11 +1,21 @@
 let themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
 let themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+let textBtn = document.getElementById('text-btn');
+
+function changeText() {
+    if (document.documentElement.classList.contains("dark")) {
+        textBtn.innerText = 'Dark Mode'
+    }else{
+        textBtn.innerText = 'Light Mode'
+    }
+}
 
 // Change the icons inside the button based on previous settings
 if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
     themeToggleLightIcon.classList.remove('hidden');
 } else {
     themeToggleDarkIcon.classList.remove('hidden');
+
 }
 
 let themeToggleBtn = document.getElementById('theme-toggle');
@@ -15,6 +25,8 @@ themeToggleBtn.addEventListener('click', function () {
     // toggle icons inside button
     themeToggleDarkIcon.classList.toggle('hidden');
     themeToggleLightIcon.classList.toggle('hidden');
+
+    changeText()
 
     // if set via local storage previously
     if (localStorage.getItem('color-theme')) {
